@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changes/2022-05-25-initial-user-table.yaml
+  - include:
+      file: liquibase/changes/2022-05-26-initial-search-history-table.yaml
+  - include:
+      file: liquibase/changes/2022-05-26-add-relation-between-user-and-search-history-tables.yaml

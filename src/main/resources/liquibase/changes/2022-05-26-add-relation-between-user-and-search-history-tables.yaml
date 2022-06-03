@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: 121218036
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: search_history
+            constraintName: fk_user
+            referencedColumnNames: id
+            referencedTableName: user

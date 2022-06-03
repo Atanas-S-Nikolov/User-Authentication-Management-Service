@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: 121218036
+      changes:
+        - createTable:
+            tableName: search_history
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: search
+                  type: varchar(255)
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
