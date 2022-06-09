@@ -26,7 +26,6 @@ public class WebSecurityConfiguration {
         return http
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
-                //TODO: Implement csrf protection in backend and frontend (look bookmarks in chrome :))
                 .csrf().disable()
                 .build();
     }
