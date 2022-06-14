@@ -44,11 +44,29 @@ public class UserService implements IUserService {
 
     @Transactional
     @Override
-    public User updateUserLoginStatus(String username, String password, boolean isLoggedInStatus) {
+    public User updateUserLoginStatus(String username, String password) {
         return executeRepositoryCall(() -> {
             User user = toInternal(findUser(username, password));
-            checkLoginStatus(isLoggedInStatus, user.getLoggedIn());
-            user.setLoggedIn(isLoggedInStatus);
+            checkLoginStatus(true, user.getLoggedIn());
+            user.setLoggedIn(true);
+            repository.updateLoginStatus(user.getId(), user.getLoggedIn());
+            return user;
+        });
+    }
+
+    @Transactional
+    @Override
+    public User updateUserLoginStatus(String username) {
+        return executeRepositoryCall(() -> {
+            Optional<UserEntity> optionalEntity = repository.findByUsername(username);
+
+            User user = new User();
+            if (optionalEntity.isPresent()) {
+                user = toInternal(optionalEntity.get());
+            }
+
+            checkLoginStatus(false, user.getLoggedIn());
+            user.setLoggedIn(false);
             repository.updateLoginStatus(user.getId(), user.getLoggedIn());
             return user;
         });

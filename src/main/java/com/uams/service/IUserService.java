@@ -6,7 +6,9 @@ public interface IUserService {
 
     User saveUser(User user);
 
-    User updateUserLoginStatus(String username, String password, boolean isLoggedInStatus);
+    User updateUserLoginStatus(String username, String password);
+
+    User updateUserLoginStatus(String username);
 
     User updateSearchHistory(String search, String username);
 

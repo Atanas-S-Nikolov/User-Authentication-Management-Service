@@ -1,13 +1,16 @@
 package com.uams.controller;
 
 import com.uams.model.dto.CredentialDto;
+import com.uams.model.dto.LogoutDto;
 import com.uams.model.dto.RegisterDto;
 import com.uams.model.response.LogoutResponse;
 import com.uams.model.response.UserResponse;
 import com.uams.service.IUserService;
 
+import javax.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static com.uams.util.DtoConverter.toInternal;
@@ -20,6 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController("user-controller")
 @RequestMapping(path = "user/api/v1", produces = APPLICATION_JSON_VALUE)
+@Validated
 public class UserController {
 
     private final IUserService service;
@@ -37,20 +41,20 @@ public class UserController {
 
     @PostMapping(path = "/login", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> loginUser(@RequestBody CredentialDto credentialDto) {
-        UserResponse response = toUserResponse(service.updateUserLoginStatus(credentialDto.getUsername(), credentialDto.getPassword(), true));
+        UserResponse response = toUserResponse(service.updateUserLoginStatus(credentialDto.getUsername(), credentialDto.getPassword()));
         return ResponseEntity.status(OK).body(response);
     }
 
     @PostMapping(path = "/logout", consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<LogoutResponse> logoutUser(@RequestBody CredentialDto credentialDto) {
-        service.updateUserLoginStatus(credentialDto.getUsername(), credentialDto.getPassword(), false);
+    public ResponseEntity<LogoutResponse> logoutUser(@RequestBody LogoutDto logoutDto) {
+        service.updateUserLoginStatus(logoutDto.getUsername());
         return ResponseEntity.status(OK).body(new LogoutResponse("User logged out"));
     }
 
     @PatchMapping(path = "/search-history/{search}/username/{username}")
     public ResponseEntity<UserResponse> updateSearchHistory(
-            @PathVariable("search") String search,
-            @PathVariable("username") String username)
+            @PathVariable("search") @NotBlank String search,
+            @PathVariable("username") @NotBlank String username)
     {
         UserResponse response = toUserResponse(service.updateSearchHistory(search, username));
         return ResponseEntity.status(OK).body(response);
