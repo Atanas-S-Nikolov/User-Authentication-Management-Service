@@ -115,7 +115,7 @@ public class UserService implements IUserService {
             }
         }
 
-        throw new InvalidCredentialsException("Invalid credentials");
+        throw new InvalidCredentialsException("Invalid credentials or user is not registered");
     }
 
     private void checkLoginStatus(boolean isLoggedInStatus, boolean currentLoginStatus) {

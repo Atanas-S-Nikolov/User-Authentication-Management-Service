@@ -18,7 +18,7 @@ import java.util.List;
 public class WebSecurityConfiguration {
 
     private static final List<String> ORIGINS = Collections.singletonList("http://localhost:3000");
-    private static final List<String> METHODS = Arrays.asList("POST", "PATCH", "DELETE");
+    private static final List<String> METHODS = Arrays.asList("POST", "PUT", "DELETE");
     private static final List<String> HEADERS = Collections.singletonList("*");
 
     @Bean("security-filter-chain")

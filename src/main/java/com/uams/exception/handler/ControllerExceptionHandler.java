@@ -37,7 +37,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = { InvalidCredentialsException.class })
-    public ResponseEntity<Object> handleInvalidCredentials(RuntimeException exception) {
+    public ResponseEntity<Object> handleInvalidCredentials(InvalidCredentialsException exception) {
         logError(exception);
         return buildErrorResponse(UNAUTHORIZED, exception);
     }
