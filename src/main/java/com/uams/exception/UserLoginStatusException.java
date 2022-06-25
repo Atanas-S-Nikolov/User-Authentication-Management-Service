@@ -1,6 +1,7 @@
 package com.uams.exception;
 
 public class UserLoginStatusException extends RuntimeException {
+
     public UserLoginStatusException() {
         super();
     }

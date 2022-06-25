@@ -20,4 +20,3 @@ public class UserAuthenticationManagementServiceApplication {
 		SpringApplication.run(UserAuthenticationManagementServiceApplication.class, args);
 	}
 }
-
