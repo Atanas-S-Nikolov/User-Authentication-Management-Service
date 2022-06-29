@@ -64,6 +64,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     private void logError(Exception exception) {
-        LOGGER.error(exception);
+        LOGGER.error("Error occurred", exception);
     }
 }
